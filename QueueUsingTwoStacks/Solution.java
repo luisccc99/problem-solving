@@ -6,9 +6,9 @@ public class Solution {
   public static final int DEQUEUE = 2;
   public static final int PRINT_FIRST_ELEMENT = 3;
 
-  private static void move(Stack<Long> from, Stack<Long> to) {
-    while (!from.isEmpty()) {
-      to.push(from.pop());
+  private static void move(Stack<Long> source, Stack<Long> destination) {
+    while (!source.isEmpty()) {
+      destination.push(source.pop());
     }
   }
 
