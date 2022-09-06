@@ -14,7 +14,6 @@ public class Solution {
     
     Stack<Character> brackets = new Stack<>();
     char[] closingBrackets = { ')', ']', '}' };
-
     for (int i = 0; i < s.length(); i++) {
       char current = s.charAt(i);
       if (isIn(current, closingBrackets)) {
@@ -35,11 +34,14 @@ public class Solution {
         brackets.push(current);
       }
     }
+    if (!brackets.isEmpty()) {
+      return "NO";
+    }
     return "YES";
   }
 
   private static boolean isIn(char key, char[] arr) {
-    for (int i = 0; i < 0; i++) {
+    for (int i = 0; i < arr.length; i++) {
       if (key == arr[i]) {
         return true;
       }
@@ -48,6 +50,8 @@ public class Solution {
   }
 
   public static void main(String[] args) {
-
+    System.out.println(isBalanced("}][}}(}][))]")); // NO
+    System.out.println(isBalanced("{{}(")); // NO
+    System.out.println(isBalanced("({}([][]))[]()")); // YES
   }
 }
