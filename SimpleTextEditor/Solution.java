@@ -1,15 +1,15 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Solution {
-  private final StringBuilder body;
+  private final Stack<String> words;
   public static final int APPEND = 1;
   public static final int DELETE = 2;
   public static final int PRINT = 3;
   public static final int UNDO = 4;
 
-  
   public Solution() {
-    this.body = new StringBuilder();
+    words = new Stack<String>();
   }
 
   /**
@@ -17,7 +17,10 @@ public class Solution {
    * @param word to append at body
    */
   public void append(String word) {
-    body.append(word);
+    String init = words.isEmpty() ? "" : words.peek();
+    StringBuilder prev = new StringBuilder(init);
+    prev.append(word);
+    words.push(prev.toString());
   }
 
   /**
@@ -25,9 +28,8 @@ public class Solution {
    * @param k number of characters to delete
    */
   public void delete(int k) {
-    // TODO: case when n - k is negative
-    int size = body.length();
-    body.delete(size - k, body.length());
+    StringBuilder old = new StringBuilder(words.peek());
+    words.push(old.delete(old.length() - k, old.length()).toString());
   }
 
   /**
@@ -35,7 +37,7 @@ public class Solution {
    * @param k index of the character to print
    */
   public void print(int k) {
-   System.out.println(body.charAt(k - 1)); 
+    System.out.println(words.peek().charAt(k - 1));
   }
 
   /**
@@ -43,7 +45,7 @@ public class Solution {
    * body to the state it was prior to that operation
    */
   public void undo() {
-
+    words.pop();
   }
 
   public static void main(String[] args) {
